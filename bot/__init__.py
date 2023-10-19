@@ -1,4 +1,8 @@
-from dotenv import load_dotenv
+from web.plat import is_docker
 
-print(f'Dotenv loaded: {load_dotenv()}')
+if is_docker():
+    pass
+else:
+    from dotenv import load_dotenv
 
+    print(f'Dotenv loaded: {load_dotenv()}')

@@ -1,7 +1,7 @@
 #%%
 from playwright.async_api import Browser, Locator, Page, async_playwright
 
-from .plat import is_docker, whoami
+from .plat import is_docker
 
 # Define the URL and user agent
 headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.103 Safari/537.36"}
@@ -13,7 +13,7 @@ class PrigozhinSelenium:
 
     async def go_sber(self):
         self.playwright = await async_playwright().start()
-        self.browser: Browser = await self.playwright.firefox.launch(headless=False, chromium_sandbox=False)
+        self.browser: Browser = await self.playwright.firefox.launch(headless=is_docker(), chromium_sandbox=False)
         return self
     
     async def create_context_page(self, proxy = None):
