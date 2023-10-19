@@ -10,11 +10,12 @@ def whoami():
     elif current_platform == "Linux":
         # Code to run on a Linux server
         print("Running on a Linux server.")
-        return "bin/geckodriver-linux"
+        return "parsers/sber-scrape-linux-amd64"
     else:
         # Code to run on an unknown platform (you can add more cases as needed)
         print(f"Running on an unknown platform: {current_platform}")
-        return "bin/geckodriver-macos"
+        
+        return "parsers/sber-scrape"
 
 def is_docker() -> bool:
     current_platform = platform.system()

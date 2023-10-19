@@ -3,3 +3,4 @@
 *.html
 *.png
 bot/.env
+*.csv

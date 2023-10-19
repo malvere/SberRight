@@ -1,6 +1,8 @@
 #%%
 from playwright.async_api import Browser, Locator, Page, async_playwright
 
+from parsers import save
+
 from .plat import is_docker
 
 # Define the URL and user agent
@@ -57,6 +59,7 @@ class PrigozhinSelenium:
         with open('page.html', 'w') as f:
             f.write(page)
             print("Page saved!")
+            save()
 
     async def grace_shutdown(self):
         print("Driver shutdown...")
