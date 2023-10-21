@@ -8,6 +8,7 @@ ENV POETRY_VERSION=1.6.1
 ENV POETRY_HOME=/opt/poetry 
 ENV POETRY_VENV=/opt/poetry-venv 
 ENV POETRY_CACHE_DIR=/opt/.cache
+ENV PORT=10000
 
 ENV PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
@@ -36,5 +37,7 @@ RUN poetry export -f requirements.txt --output requirements.txt \
     && playwright install-deps firefox
 
 COPY . /app
+
+EXPOSE ${PORT}
 
 CMD ["poetry", "run", "python", "-m", "./main.py"]
