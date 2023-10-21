@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-yarn playwright install firefox
+playwright install firefox
 
 # Store/pull Playwright cache with build cache
 if [[ ! -d $PLAYWRIGHT_BROWSERS_PATH]]; then 
