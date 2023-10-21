@@ -21,10 +21,12 @@ async def start_bot() -> Bot:
     return bot
 
 async def on_startup(bot: Bot) -> None:
+    await bot.delete_webhook(drop_pending_updates=True)
     await bot.set_webhook(conf.webhook.webhook_host)
 
 def start_webhook() -> Bot:
     dp = get_dispatcher()
+
     bot = Bot(token=conf.bot.token, parse_mode=ParseMode.HTML)
     dp.startup.register(on_startup)
     app = web.Application()
