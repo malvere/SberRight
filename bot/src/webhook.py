@@ -2,33 +2,27 @@ import logging
 import sys
 
 # from aiogram import LoggingMiddleware
-from aiogram import BaseMiddleware, Bot, Dispatcher, Router, types
+from aiogram import Bot
 from aiogram.enums import ParseMode
-from aiogram.filters import Command, CommandStart
-from aiogram.types import Message
 from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
 from aiohttp import web
 
 from bot.config import conf
 
-router = Router()
-@router.message(CommandStart())
-async def cmd_start_handler(msg: Message) -> None:
-    return await msg.answer('Hello!')
+from .dispatcher import get_dispatcher
+
 
 async def on_startup(bot: Bot) -> None:
     await bot.set_webhook(conf.webhook.webhook_host)
 
 def main() -> None:
-    dp = Dispatcher()
-    dp.include_router(router)
+    dp = get_dispatcher()
+    bot = Bot(token=conf.bot.token, parse_mode=ParseMode.HTML)
     dp.startup.register(on_startup)
-    bot = Bot(token=conf.bot.token, parse_mode=ParseMode)
     app = web.Application()
     webhook_requests_handler = SimpleRequestHandler(
         dispatcher=dp,
         bot=bot,
-        secret_token="Hello",
     )
 
     webhook_requests_handler.register(
