@@ -1,4 +1,7 @@
+import os
 import platform
+
+from bot.config import BotConfig, Webapp, Webhook
 
 
 def whoami():
@@ -20,7 +23,7 @@ def whoami():
 def is_docker() -> bool:
     current_platform = platform.system()
     if current_platform == "Linux":
-        print("Running in a container!")
+        print(f"Webhook URL: {Webhook.webhook_url}\n Webapp port: {Webapp.web_app_port}\nBot token: {BotConfig.token}")
         return True
     else:
         print(f"Running locally: {current_platform}")
