@@ -39,4 +39,4 @@ COPY . /app
 
 EXPOSE ${PORT}
 
-CMD ["poetry", "run", "python", "-m", "./main.py"]
+CMD ["poetry", "run", "python", "-m", "main.py"]
