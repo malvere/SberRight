@@ -8,7 +8,6 @@ ENV POETRY_VERSION=1.6.1
 ENV POETRY_HOME=/opt/poetry 
 ENV POETRY_VENV=/opt/poetry-venv 
 ENV POETRY_CACHE_DIR=/opt/.cache
-
 ENV PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100
@@ -27,16 +26,15 @@ WORKDIR /app
 
 COPY poetry.lock pyproject.toml ./
 
-# RUN poetry check
-
 # Install Python dependencies using Poetry
-RUN poetry export -f requirements.txt --output requirements.txt \
-    && pip install --no-cache-dir -r requirements.txt \
-    && playwright install firefox \
-    && playwright install-deps firefox
+RUN poetry install
+
+# Install playwright dependencies
+RUN poetry run playwright install firefox \
+    && poetry run playwright install-deps firefox
 
 COPY . /app
 
 EXPOSE ${PORT}
 
-CMD ["poetry", "run", "python", "-m", "main.py"]
+CMD ["poetry", "run", "python", "main.py"]
