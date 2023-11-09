@@ -52,7 +52,8 @@ class PrigozhinSelenium:
         return mobs
     
     def captcha(self):
-        cpt = Captcha(self.page)
+        page = self.page
+        cpt = Captcha(page)
         return cpt
     
     def save_html(self, page: Page):
