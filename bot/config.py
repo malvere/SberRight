@@ -9,8 +9,7 @@ class BotConfig:
 
 @dataclass
 class Webhook():
-    project_name: str = getenv("PROJECT_NAME")
-    webhook_host: str = f"https://{project_name}.onrender.com"
+    webhook_host: str = getenv("RENDER_EXTERNAL_URL")
     webhook_url_path: str = "/webhook"
     webhook_url: str = f"{webhook_host}{webhook_url_path}"
     
